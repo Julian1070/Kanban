@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title> Kanban </title>
+</head>
+<body>
+  <h1> Kanban </h1>
+  <div> Add a new item:
+    <form action = "/add" method="POST">
+      <input type="text", name="todoitem">
+      <input type="submit">
+    <form>
+  </div>
+  <form>
+    <h3>TODO</h3>
+    <ul>
+      {% for todo in todos %}
+      <li>
+        {{ todo.text }} | Mark as <a href={{ url_for("doing", id=todo.id) }}>
+        doing, </a><a href={{ url_for("done", id=todo.id)}}>done, </a>
+        <a href={{ url_for("remove", id=todo.id)}}>remove</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </form>
+  <form>
+    <h3>DOING</h3>
+    <ul>
+      {% for doin in doing %}
+      <li>
+        {{ doin.text }} | Mark as <a href={{ url_for("todo", id=doin.id) }}>
+        todo, </a><a href={{ url_for("done", id=doin.id)}}>done, </a>
+        <a href={{ url_for("remove", id=doin.id)}}>remove</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </form>
+  <form>
+    <h3>DONE</h3>
+    <ul>
+      {% for don in done %}
+      <li>
+        {{ don.text }} | Mark as <a href={{ url_for("todo", id=don.id) }}>
+        todo, </a><a href={{ url_for("doing", id=don.id)}}>doing, </a>
+        <a href={{ url_for("remove", id=don.id)}}>remove</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </form>
+</body>
+</html>
